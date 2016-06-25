@@ -5,6 +5,7 @@
 - [Добавить группу пользователей](migrations/cms/main/AddUserGroup.php)
 - [Добавить агента](migrations/cms/main/AddAgent.php)
 - [Добавить записи в b_option](migrations/cms/main/SetOption.php)
+
 ##Информационные блоки
 - [Добавить свойство инфоблока](migrations/cms/iblock/AddIblockProperty.php)
 - [Обновить свойство инфоблока](migrations/cms/iblock/UpdateIblockProperty.php)
