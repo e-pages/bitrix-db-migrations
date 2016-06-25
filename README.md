@@ -15,8 +15,8 @@
 
 ##Интернет-магазин
 
-- [Добавить свойство заказа](master/migrations/cms/sale/AddOrderProperty.php)
-- [Обнулить внутренний счет](master/migrations/cms/sale/ClearSaleUserAccounts.php)
+- [Добавить свойство заказа](migrations/cms/sale/AddOrderProperty.php)
+- [Обнулить внутренний счет](migrations/cms/sale/ClearSaleUserAccounts.php)
 
 ##Каталог
 
