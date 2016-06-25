@@ -10,7 +10,7 @@ class AddAgent
     public function up()
     {
         CAgent::AddAgent(
-            'AgentFunction',
+            'AgentFunction();',
             'main',
             'N',
             86400,
@@ -25,7 +25,7 @@ class AddAgent
     {
         $rsAgent = CAgent::GetList(
             [],
-            ['NAME' => 'AgentFunction']
+            ['NAME' => 'AgentFunction();']
         );
 
         if ($arAgent = $rsAgent->Fetch()) {
