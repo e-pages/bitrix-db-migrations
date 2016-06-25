@@ -7,6 +7,7 @@
 - [Добавить записи в b_option](migrations/cms/main/SetOption.php)
 
 ##Информационные блоки
+
 - [Добавить свойство инфоблока](migrations/cms/iblock/AddIblockProperty.php)
 - [Обновить свойство инфоблока](migrations/cms/iblock/UpdateIblockProperty.php)
 - [Обновить свойство инфоблока типа Список](migrations/cms/iblock/AddEnumIblockPropertyValues.php)
