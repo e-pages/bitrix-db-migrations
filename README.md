@@ -12,17 +12,26 @@
 - [Обновить свойство инфоблока](migrations/cms/iblock/UpdateIblockProperty.php)
 - [Обновить свойство инфоблока типа Список](migrations/cms/iblock/AddEnumIblockPropertyValues.php)
 - [Добавить новый раздел](migrations/cms/iblock/AddNewIblockSection.php)
+
 ##Интернет-магазин
+
 - [Добавить свойство заказа](master/migrations/cms/sale/AddOrderProperty.php)
 - [Обнулить внутренний счет](master/migrations/cms/sale/ClearSaleUserAccounts.php)
+
 ##Каталог
+
 - [Добавить тип цен](migrations/cms/catalog/AddNewCatalogGroup.php)
+
 ##Веб-формы
+
 - [Добавить веб-форму](migrations/cms/forms/AddNewWebForm.php)
+
 ##Другое
+
 - [Произвольный SQL-запрос](migrations/cms/main/RawSql.php)
 
 ---
 
 ##Кор. портал
+
 - [Новая стадия сделки](migrations/intranet/crm/AddNewDealStages.php)
