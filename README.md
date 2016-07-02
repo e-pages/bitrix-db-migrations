@@ -9,6 +9,7 @@
 ##Информационные блоки
 
 - [Добавить свойство инфоблока](migrations/cms/iblock/AddIblockProperty.php)
+- [Добавить свойство инфоблока типа Список](migrations/cms/iblock/AddEnumIblockProperty.php)
 - [Обновить свойство инфоблока](migrations/cms/iblock/UpdateIblockProperty.php)
 - [Обновить свойство инфоблока типа Список](migrations/cms/iblock/AddEnumIblockPropertyValues.php)
 - [Добавить новый раздел](migrations/cms/iblock/AddNewIblockSection.php)
