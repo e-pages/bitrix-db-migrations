@@ -1,6 +1,6 @@
 <?php
 
-class AddSiteRuleForLandingTemplate
+class AddSiteTemplateRule
 {
     private $siteId = 's1';
     private $condition = 'substr($_SERVER[\'HTTP_HOST\'], 0, 8)===\'landing.\'';

@@ -5,7 +5,7 @@
 - [Добавить группу пользователей](migrations/cms/main/AddUserGroup.php)
 - [Добавить агента](migrations/cms/main/AddAgent.php)
 - [Добавить записи в b_option](migrations/cms/main/SetOption.php)
-- [Добавить правило подключения шаблона сайта](migrations/cms/main/AddSiteTemplate.php)
+- [Добавить правило подключения шаблона сайта](migrations/cms/main/AddSiteTemplateRule.php)
 
 ##Информационные блоки
 
