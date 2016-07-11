@@ -274,6 +274,29 @@ class AddNewWebForm
                 'arFILTER_ANSWER_VALUE' => null,
             ];
             CFormField::Set($infoFileField, 0, 'N');
+
+            //добавить новый статус результата формы
+            $resultStatus = [
+                'FORM_ID' => $res,
+                'C_SORT' => '100',
+                'ACTIVE' => 'Y',
+                'TITLE' => 'Новый',
+                'DESCRIPTION' => '',
+                'CSS' => 'statusgreen',
+                'HANDLER_OUT' => '',
+                'HANDLER_IN' => '',
+                'DEFAULT_VALUE' => 'Y',
+                'arPERMISSION_VIEW' => [
+                    0 => '0',
+                ],
+                'arPERMISSION_MOVE' => [
+                    0 => '0',
+                ],
+                'arPERMISSION_EDIT' => null,
+                'arPERMISSION_DELETE' => null,
+                'arMAIL_TEMPLATE' => null,
+            ];
+            CFormStatus::Set($resultStatus, 0, 'N');
         }
     }
 
