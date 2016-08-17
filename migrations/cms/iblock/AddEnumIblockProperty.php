@@ -5,63 +5,67 @@
  * Date: 25/7/2
  * Time: 16:54
  */
-class AddIblockProperty
+class AddIBlockProperty
 {
     /**
      * Новые значения списка
      * @var array
      */
-    public static $arNewBoatsTypeValues = [
-        'Y',
-    ];
+    public static $listPropertyValues = array(
+        'OPTION_1' => 'Option 1',
+        'OPTION_2' => 'Option 2',
+        'OPTION_3' => 'Option 3',
+    );
+    public static $listPropertyName = 'List of options';
+    public static $listPropertyCode = 'OPTIONS_LIST';
+    public static $iBlockId = 1;
 
     public function up()
     {
-        $iblock = CIBlock::GetList([], ['ID' => IBLOCK_ID])->GetNext();
-        if ($iblock['ID']) {
+        \Bitrix\Main\Loader::includeModule('iblock');
+        $iBlock = CIBlock::GetList(array(), array('ID' => self::$iBlockId))->GetNext();
+        if ($iBlock['ID']) {
             $ibp = new CIBlockProperty;
-            $ibpenum = new CIBlockPropertyEnum;
-
-            $arFields = [
-                'NAME' => 'Товар-растение',
+            $ibpEnum = new CIBlockPropertyEnum;
+            $arFields = array(
+                'NAME' => self::$listPropertyName,
                 'ACTIVE' => 'Y',
                 'SORT' => '100',
-                'CODE' => 'PRODUCT_PLANT',
+                'CODE' => self::$listPropertyCode,
                 'PROPERTY_TYPE' => 'L',
                 'FILTRABLE' => 'Y',
-                'IBLOCK_ID' => $iblock['ID']
-            ];
-            $ibp->Add($arFields);
-
-            $properties = CIBlockProperty::GetList(
-                [],
-                [
-                    'IBLOCK_ID' => $iblock['ID'],
-                    'CODE' => 'PRODUCT_PLANT'
-                ]
+                'IBLOCK_ID' => $iBlock['ID']
             );
-            if ($prop_fields = $properties->GetNext()) {
-                foreach (self::$arNewBoatsTypeValues as $newBoatsTypeValue) {
-                    $ibpenum->Add([
-                        'PROPERTY_ID' => $prop_fields['ID'],
-                        'VALUE' => $newBoatsTypeValue,
-                        'XML_ID' => $newBoatsTypeValue
-                    ]);
+            $ibp->Add($arFields);
+            $properties = CIBlockProperty::GetList(
+                array(),
+                array(
+                    'IBLOCK_ID' => $iBlock['ID'],
+                    'CODE' => self::$listPropertyCode
+                )
+            );
+            if ($propFields = $properties->GetNext()) {
+                foreach (self::$listPropertyValues as $listPropertyId => $listPropertyValue) {
+                    $ibpEnum->Add(array(
+                        'PROPERTY_ID' => $propFields['ID'],
+                        'VALUE' => $listPropertyValue,
+                        'XML_ID' => $listPropertyId,
+                    ));
                 }
             }
         }
     }
-
     public function down()
     {
-        $iblock = CIBlock::GetList([], ['ID' => IBLOCK_ID])->GetNext();
-        if ($iblock['ID']) {
+        \Bitrix\Main\Loader::includeModule('iblock');
+        $iBlock = CIBlock::GetList(array(), array('ID' => self::$iBlockId))->GetNext();
+        if ($iBlock['ID']) {
             $properties = CIBlockProperty::GetList(
-                ['sort' => 'asc', 'name' => 'asc'],
-                ['IBLOCK_ID' => $iblock['ID'], 'CODE' => 'PRODUCT_PLANT']
+                array(),
+                array('IBLOCK_ID' => $iBlock['ID'], 'CODE' => self::$listPropertyCode)
             );
-            if ($prop_fields = $properties->GetNext()) {
-                CIBlockProperty::Delete($prop_fields['ID']);
+            if ($propFields = $properties->GetNext()) {
+                CIBlockProperty::Delete($propFields['ID']);
             }
         }
     }

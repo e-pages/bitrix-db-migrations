@@ -11,27 +11,29 @@ class AddIblockProperty
      * Массив свойств одного типа, которые нужно создать
      * @var array
      */
-    protected $propertiesText = [
-        'PRODUCT_TYPE' => 'Тип товара',
-    ];
+    private $textProperties = array(
+        'PROPERTY_CODE' => 'Property name',
+    );
+    private $iBlockId = 1;
 
     public function up()
     {
-        $iblock = CIBlock::GetList([], ['ID' => IBLOCK_ID])->GetNext();
+        \Bitrix\Main\Loader::includeModule('iblock');
+        $iBlock = CIBlock::GetList(array(), array('ID' => self::$iBlockId))->GetNext();
 
-        if ($iblock['ID']) {
+        if ($iBlock['ID']) {
             $ibp = new CIBlockProperty;
 
-            foreach ($this->propertiesText as $propCode => $property) {
-                $arFields = [
+            foreach ($this->textProperties as $propCode => $property) {
+                $arFields = array(
                     'NAME' => $property,
                     'ACTIVE' => 'Y',
                     'SORT' => '100',
                     'CODE' => $propCode,
                     'PROPERTY_TYPE' => 'S',
                     'FILTRABLE' => 'Y',
-                    'IBLOCK_ID' => $iblock['ID']
-                ];
+                    'IBLOCK_ID' => $iBlock['ID']
+                );
 
                 $ibp->Add($arFields);
             }
@@ -40,16 +42,17 @@ class AddIblockProperty
 
     public function down()
     {
-        $iblock = CIBlock::GetList([], ['ID' => IBLOCK_ID])->GetNext();
+        \Bitrix\Main\Loader::includeModule('iblock');
+        $iBlock = CIBlock::GetList(array(), array('ID' => self::$iBlockId))->GetNext();
 
-        if ($iblock['ID']) {
-            foreach (array_keys($this->propertiesText) as $propCode) {
+        if ($iBlock['ID']) {
+            foreach (array_keys($this->textProperties) as $propCode) {
                 $properties = CIBlockProperty::GetList(
-                    ['sort' => 'asc', 'name' => 'asc'],
-                    ['IBLOCK_ID' => $iblock['ID'], 'CODE' => $propCode]
+                    array(),
+                    array('IBLOCK_ID' => $iBlock['ID'], 'CODE' => $propCode)
                 );
-                if ($prop_fields = $properties->GetNext()) {
-                    CIBlockProperty::Delete($prop_fields['ID']);
+                if ($propFields = $properties->GetNext()) {
+                    CIBlockProperty::Delete($propFields['ID']);
                 }
             }
         }
