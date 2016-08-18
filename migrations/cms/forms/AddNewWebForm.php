@@ -7,16 +7,26 @@
  */
 class AddNewWebForm
 {
+    private static $formId = 'awesome_form';
+    private static $formName = 'Awesome form';
+    private static $formButton = 'Fill';
+    private static $sites = array(
+        's1',
+    );
+
     public function up()
     {
         \Bitrix\Main\Loader::includeModule('form');
+        $form = new CForm();
+        $formField = new CFormField();
+        $formStatus = new CFormStatus();
 
         //Добавить саму сущность формы
-        $arFormFields = [
-            'NAME' => 'Заявка на сервис',
-            'SID' => 'service_form',
+        $arFormFields = array(
+            'NAME' => self::$formName,
+            'SID' => self::$formId,
             'C_SORT' => '300',
-            'BUTTON' => 'Оформить онлайн заявку',
+            'BUTTON' => self::$formButton,
             'USE_CAPTCHA' => 'N',
             'DESCRIPTION' => '',
             'DESCRIPTION_TYPE' => 'text',
@@ -29,11 +39,11 @@ class AddNewWebForm
             'USE_RESTRICTIONS' => 'N',
             'RESTRICT_USER' => 0,
             'RESTRICT_TIME' => 0,
-            'arRESTRICT_STATUS' => [],
+            'arRESTRICT_STATUS' => array(),
             'STAT_EVENT1' => 'form',
-            'STAT_EVENT2' => 'service_form',
+            'STAT_EVENT2' => self::$formId,
             'STAT_EVENT3' => '',
-            'arIMAGE' => [
+            'arIMAGE' => array(
                 'name' => '',
                 'type' => '',
                 'tmp_name' => '',
@@ -41,38 +51,24 @@ class AddNewWebForm
                 'size' => 0,
                 'MODULE_ID' => 'form',
                 'del' => null,
-            ],
-            'arSITE' => [
-                0 => 's1',
-            ],
+            ),
+            'arSITE' => self::$sites,
             'arMAIL_TEMPLATE' => null,
             'FORM_TEMPLATE' => '',
             'USE_DEFAULT_TEMPLATE' => 'Y',
-            'arMENU' => [
-                'ru' => 'Заявка на сервис',
-                'en' => 'Service form',
-            ],
-            'arGROUP' => [
-                2 => '0',
-                5 => '0',
-                3 => '0',
-                4 => '0',
-                8 => '0',
-                17 => '0',
-                21 => '0',
-                11 => '0',
-                12 => '0',
-                6 => '0',
-                7 => '0',
-            ],
-        ];
+            'arMENU' => array(
+                'ru' => self::$formName,
+                'en' => self::$formName,
+            ),
+            'arGROUP' => array(),
+        );
 
-        $res = intval(CForm::Set($arFormFields, 0, 'N'));
+        $res = intval($form->Set($arFormFields, 0, 'N'));
 
         //Если форма добавлена - добавить ей поля
         if ($res) {
             //Текстовое поле
-            $fioField = [
+            $fioField = array(
                 'FORM_ID' => $res,
                 'ACTIVE' => 'Y',
                 'TITLE' => 'ФИО',
@@ -87,7 +83,7 @@ class AddNewWebForm
                 'COMMENTS' => '',
                 'FILTER_TITLE' => '',
                 'RESULTS_TABLE_TITLE' => '',
-                'arIMAGE' => [
+                'arIMAGE' => array(
                     'name' => '',
                     'type' => '',
                     'tmp_name' => '',
@@ -95,9 +91,9 @@ class AddNewWebForm
                     'size' => 0,
                     'MODULE_ID' => 'form',
                     'del' => null,
-                ],
-                'arANSWER' => [
-                    0 => [
+                ),
+                'arANSWER' => array(
+                    0 => array(
                         'ID' => '0',
                         'DELETE' => null,
                         'MESSAGE' => 'ФИО',
@@ -107,17 +103,17 @@ class AddNewWebForm
                         'FIELD_TYPE' => 'text',
                         'FIELD_WIDTH' => '',
                         'FIELD_HEIGHT' => null,
-                        'FIELD_PARAM' => 'Иванов Иван Иванович',
-                    ],
-                ],
+                        'FIELD_PARAM' => 'class="'.self::$formId.'_fio"',
+                    ),
+                ),
                 'arFILTER_USER' => null,
                 'arFILTER_ANSWER_TEXT' => null,
                 'arFILTER_ANSWER_VALUE' => null,
-            ];
-            CFormField::Set($fioField, 0, 'N');
+            );
+            $formField->Set($fioField, 0, 'N');
 
             //Радио кнопки
-            $productTypeField = [
+            $productTypeField = array(
                 'FORM_ID' => $res,
                 'ACTIVE' => 'Y',
                 'TITLE' => 'Тип товара',
@@ -132,7 +128,7 @@ class AddNewWebForm
                 'COMMENTS' => '',
                 'FILTER_TITLE' => '',
                 'RESULTS_TABLE_TITLE' => '',
-                'arIMAGE' => [
+                'arIMAGE' => array(
                     'name' => '',
                     'type' => '',
                     'tmp_name' => '',
@@ -140,9 +136,9 @@ class AddNewWebForm
                     'size' => 0,
                     'MODULE_ID' => 'form',
                     'del' => null,
-                ],
-                'arANSWER' => [
-                    0 => [
+                ),
+                'arANSWER' => array(
+                    0 => array(
                         'ID' => '0',
                         'DELETE' => null,
                         'MESSAGE' => 'лодка',
@@ -153,8 +149,8 @@ class AddNewWebForm
                         'FIELD_WIDTH' => null,
                         'FIELD_HEIGHT' => null,
                         'FIELD_PARAM' => '',
-                    ],
-                    1 => [
+                    ),
+                    1 => array(
                         'ID' => '0',
                         'DELETE' => null,
                         'MESSAGE' => 'мотор',
@@ -165,8 +161,8 @@ class AddNewWebForm
                         'FIELD_WIDTH' => null,
                         'FIELD_HEIGHT' => null,
                         'FIELD_PARAM' => '',
-                    ],
-                    2 => [
+                    ),
+                    2 => array(
                         'ID' => '0',
                         'DELETE' => null,
                         'MESSAGE' => 'аксессуар',
@@ -177,16 +173,16 @@ class AddNewWebForm
                         'FIELD_WIDTH' => null,
                         'FIELD_HEIGHT' => null,
                         'FIELD_PARAM' => '',
-                    ],
-                ],
+                    ),
+                ),
                 'arFILTER_USER' => null,
                 'arFILTER_ANSWER_TEXT' => null,
                 'arFILTER_ANSWER_VALUE' => null,
-            ];
-            CFormField::Set($productTypeField, 0, 'N');
+            );
+            $formField->Set($productTypeField, 0, 'N');
 
             //Textarea
-            $reasonField = [
+            $reasonField = array(
                 'FORM_ID' => $res,
                 'ACTIVE' => 'Y',
                 'TITLE' => 'Причина обращения',
@@ -201,7 +197,7 @@ class AddNewWebForm
                 'COMMENTS' => '',
                 'FILTER_TITLE' => '',
                 'RESULTS_TABLE_TITLE' => '',
-                'arIMAGE' => [
+                'arIMAGE' => array(
                     'name' => '',
                     'type' => '',
                     'tmp_name' => '',
@@ -209,9 +205,9 @@ class AddNewWebForm
                     'size' => 0,
                     'MODULE_ID' => 'form',
                     'del' => null,
-                ],
-                'arANSWER' => [
-                    0 => [
+                ),
+                'arANSWER' => array(
+                    0 => array(
                         'ID' => '0',
                         'DELETE' => null,
                         'MESSAGE' => 'Причина обращения',
@@ -222,16 +218,16 @@ class AddNewWebForm
                         'FIELD_WIDTH' => '',
                         'FIELD_HEIGHT' => null,
                         'FIELD_PARAM' => '',
-                    ],
-                ],
+                    ),
+                ),
                 'arFILTER_USER' => null,
                 'arFILTER_ANSWER_TEXT' => null,
                 'arFILTER_ANSWER_VALUE' => null,
-            ];
-            CFormField::Set($reasonField, 0, 'N');
+            );
+            $formField->Set($reasonField, 0, 'N');
 
             //Файл
-            $infoFileField = [
+            $infoFileField = array(
                 'FORM_ID' => $res,
                 'ACTIVE' => 'Y',
                 'TITLE' => 'Информация о продукции',
@@ -246,7 +242,7 @@ class AddNewWebForm
                 'COMMENTS' => '',
                 'FILTER_TITLE' => '',
                 'RESULTS_TABLE_TITLE' => '',
-                'arIMAGE' => [
+                'arIMAGE' => array(
                     'name' => '',
                     'type' => '',
                     'tmp_name' => '',
@@ -254,9 +250,9 @@ class AddNewWebForm
                     'size' => 0,
                     'MODULE_ID' => 'form',
                     'del' => null,
-                ],
-                'arANSWER' => [
-                    0 => [
+                ),
+                'arANSWER' => array(
+                    0 => array(
                         'ID' => '0',
                         'DELETE' => null,
                         'MESSAGE' => 'Информация о продукции',
@@ -267,16 +263,16 @@ class AddNewWebForm
                         'FIELD_WIDTH' => null,
                         'FIELD_HEIGHT' => null,
                         'FIELD_PARAM' => '',
-                    ],
-                ],
+                    ),
+                ),
                 'arFILTER_USER' => null,
                 'arFILTER_ANSWER_TEXT' => null,
                 'arFILTER_ANSWER_VALUE' => null,
-            ];
-            CFormField::Set($infoFileField, 0, 'N');
+            );
+            $formField->Set($infoFileField, 0, 'N');
 
             //добавить новый статус результата формы
-            $resultStatus = [
+            $resultStatus = array(
                 'FORM_ID' => $res,
                 'C_SORT' => '100',
                 'ACTIVE' => 'Y',
@@ -286,29 +282,32 @@ class AddNewWebForm
                 'HANDLER_OUT' => '',
                 'HANDLER_IN' => '',
                 'DEFAULT_VALUE' => 'Y',
-                'arPERMISSION_VIEW' => [
+                'arPERMISSION_VIEW' => array(
                     0 => '0',
-                ],
-                'arPERMISSION_MOVE' => [
+                ),
+                'arPERMISSION_MOVE' => array(
                     0 => '0',
-                ],
+                ),
                 'arPERMISSION_EDIT' => null,
                 'arPERMISSION_DELETE' => null,
                 'arMAIL_TEMPLATE' => null,
-            ];
-            CFormStatus::Set($resultStatus, 0, 'N');
+            );
+            $formStatus->Set($resultStatus, 0, 'N');
+            $arTemplates = $form->SetMailTemplate($res, 'Y', self::$formId);
+            $form->Set(array('arMAIL_TEMPLATE' => $arTemplates), $res);
         }
     }
 
     public function down()
     {
         \Bitrix\Main\Loader::includeModule('form');
+        $form = new CForm();
 
         $by = 'ID';
         $order = 'ASC';
-        $formRes = CForm::GetList($by, $order, ['SID' => 'service_form']);
+        $formRes = $form->GetList($by, $order, array('SID' => self::$formId));
         if ($arForm = $formRes->Fetch()) {
-            CForm::Delete($arForm['ID'], 'N');
+            $form->Delete($arForm['ID'], 'N');
         }
     }
 }
