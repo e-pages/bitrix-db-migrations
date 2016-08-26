@@ -294,7 +294,7 @@ class AddNewWebForm
             );
             $formStatus->Set($resultStatus, 0, 'N');
             $arTemplates = $form->SetMailTemplate($res, 'Y', self::$formId);
-            $form->Set(array('arMAIL_TEMPLATE' => $arTemplates), $res);
+            $form->Set(array('arMAIL_TEMPLATE' => $arTemplates), $res, 'N');
         }
     }
 
