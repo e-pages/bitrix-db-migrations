@@ -19,7 +19,7 @@ class AddIblockProperty
     public function up()
     {
         \Bitrix\Main\Loader::includeModule('iblock');
-        $iBlock = CIBlock::GetList(array(), array('ID' => self::$iBlockId))->GetNext();
+        $iBlock = CIBlock::GetList(array(), array('ID' => $this->iBlockId))->GetNext();
 
         if ($iBlock['ID']) {
             $ibp = new CIBlockProperty;
@@ -43,7 +43,7 @@ class AddIblockProperty
     public function down()
     {
         \Bitrix\Main\Loader::includeModule('iblock');
-        $iBlock = CIBlock::GetList(array(), array('ID' => self::$iBlockId))->GetNext();
+        $iBlock = CIBlock::GetList(array(), array('ID' => $this->iBlockId))->GetNext();
 
         if ($iBlock['ID']) {
             foreach (array_keys($this->textProperties) as $propCode) {

@@ -3,38 +3,42 @@
 /**
  * User: Rodion Abdurakhimov
  * Date: 25/6/16
- * Time: 18:00
+ * Time: 18:00.
  */
 class AddEnumIblockPropertyValues
 {
     /**
-     * Новые значения списка
+     * Новые значения списка.
+     *
      * @var array
      */
-    public static $arNewBoatsTypeValues = [
+    public static $arNewBoatsTypeValues = array(
         'Плоскодонные',
         'Килевые',
-        'Под водомет'
-    ];
+        'Под водомет',
+    );
+
+    private $iBlockId = IBLOCK_ID;
+    private $code = 'TIP_LODOK';
 
     public function up()
     {
-        $ibpenum = new CIBlockPropertyEnum;
+        $ibpenum = new CIBlockPropertyEnum();
 
         //Добавить новые значения в список свойства с кодом TIP_LODOK
         $properties = CIBlockProperty::GetList(
-            [],
-            [
-                'IBLOCK_ID' => IBLOCK_ID,
-                'CODE' => 'TIP_LODOK'
-            ]
+            array(),
+            array(
+                'IBLOCK_ID' => $this->iBlockId,
+                'CODE' => $this->code,
+            )
         );
         if ($prop_fields = $properties->GetNext()) {
             foreach (self::$arNewBoatsTypeValues as $arNewBoatsTypeValue) {
-                $ibpenum->Add([
+                $ibpenum->Add(array(
                     'PROPERTY_ID' => $prop_fields['ID'],
-                    'VALUE' => $arNewBoatsTypeValue
-                ]);
+                    'VALUE' => $arNewBoatsTypeValue,
+                ));
             }
         }
     }
@@ -43,11 +47,11 @@ class AddEnumIblockPropertyValues
     {
         //Удалить значения, созданные миграцией
         $property_enums = CIBlockPropertyEnum::GetList(
-            [],
-            [
-                'IBLOCK_ID' => IBLOCK_ID,
-                'CODE' => 'TIP_LODOK'
-            ]
+            array(),
+            array(
+                'IBLOCK_ID' => $this->iBlockId,
+                'CODE' => $this->code,
+            )
         );
         while ($enum_fields = $property_enums->GetNext()) {
             if (in_array($enum_fields['VALUE'], self::$arNewBoatsTypeValues)) {

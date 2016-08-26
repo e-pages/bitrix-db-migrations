@@ -7,24 +7,24 @@
  */
 class AddNewDealStages
 {
-    protected static $arNewStatuses = [
+    protected static $arNewStatuses = array(
         'Новая стадия 1',
         'Новая стадия 2',
         'Новая стадия 3',
-    ];
+    );
 
     public function up()
     {
         Bitrix\Main\Loader::includeModule('crm');
 
-        $arLastStatus = Bitrix\Crm\StatusTable::getList([
-            'order' => [
+        $arLastStatus = Bitrix\Crm\StatusTable::getList(array(
+            'order' => array(
                 'SORT' => 'DESC'
-            ],
-            'filter' => [
+            ),
+            'filter' => array(
                 'ENTITY_ID' => 'DEAL_STAGE'
-            ]
-        ])->fetchAll();
+            )
+        ))->fetchAll();
 
         $maxSort = 0;
         $maxStatusId = 0;
@@ -40,12 +40,12 @@ class AddNewDealStages
             $maxSort += 10;
             $maxStatusId++;
 
-            Bitrix\Crm\StatusTable::add([
+            Bitrix\Crm\StatusTable::add(array(
                 'ENTITY_ID' => 'DEAL_STAGE',
                 'NAME' => $newStatus,
                 'STATUS_ID' => (string)$maxStatusId,
                 'SORT' => $maxSort
-            ]);
+            ));
         }
     }
 
@@ -53,11 +53,11 @@ class AddNewDealStages
     {
         Bitrix\Main\Loader::includeModule('crm');
 
-        $statuses = Bitrix\Crm\StatusTable::getList([
-            'filter' => [
+        $statuses = Bitrix\Crm\StatusTable::getList(array(
+            'filter' => array(
                 'NAME' => self::$arNewStatuses
-            ]
-        ])->fetchAll();
+            )
+        ))->fetchAll();
 
         global $DB;
 
