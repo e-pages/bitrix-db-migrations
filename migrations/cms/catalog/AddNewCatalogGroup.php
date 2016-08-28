@@ -12,20 +12,20 @@ class AddNewCatalogGroup
         \Bitrix\Main\Loader::includeModule('catalog');
 
         //для админов, добавьте в массив идентификаторы нужных групп
-        $priceUserGroups = [1];
+        $priceUserGroups = array(1);
 
-        $priceType = [
+        $priceType = array(
             'NAME' => 'DISCOUNT_COUPONS',
             'BASE' => 'N',
             'SORT' => 100,
             'XML_ID' => 'discount-coupons',
             'USER_GROUP' => $priceUserGroups,
             'USER_GROUP_BUY' => $priceUserGroups,
-            'USER_LANG' => [
+            'USER_LANG' => array(
                 'ru' => 'Скидка по купону',
                 'en' => '',
-            ],
-        ];
+            ),
+        );
 
         CCatalogGroup::Add($priceType);
     }
@@ -35,8 +35,8 @@ class AddNewCatalogGroup
         \Bitrix\Main\Loader::includeModule('catalog');
 
         $dbPriceType = CCatalogGroup::GetList(
-            ["SORT" => "ASC"],
-            ["NAME" => "DISCOUNT_COUPONS"]
+            array("SORT" => "ASC"),
+            array("NAME" => "DISCOUNT_COUPONS")
         );
         if ($arPriceType = $dbPriceType->Fetch()) {
             CCatalogGroup::Delete($arPriceType['ID']);

@@ -12,14 +12,14 @@ class ClearSaleUserAccounts
         //Обнулить внутренние счета пользователям
         \Bitrix\Main\Loader::includeModule('sale');
         $dbAccountCurrency = CSaleUserAccount::GetList(
-            [],
-            ['>CURRENT_BUDGET' => 0],
+            array(),
+            array('>CURRENT_BUDGET' => 0),
             false,
             false,
-            ['ID', 'CURRENT_BUDGET', 'CURRENCY']
+            array('ID', 'CURRENT_BUDGET', 'CURRENCY')
         );
         while ($arAccountCurrency = $dbAccountCurrency->Fetch()) {
-            CSaleUserAccount::Update($arAccountCurrency['ID'], ['CURRENT_BUDGET' => 0.00]);
+            CSaleUserAccount::Update($arAccountCurrency['ID'], array('CURRENT_BUDGET' => 0.00));
         }
     }
 }

@@ -24,8 +24,8 @@ class AddAgent
     public function down()
     {
         $rsAgent = CAgent::GetList(
-            [],
-            ['NAME' => 'AgentFunction();']
+            array(),
+            array('NAME' => 'AgentFunction();')
         );
 
         if ($arAgent = $rsAgent->Fetch()) {

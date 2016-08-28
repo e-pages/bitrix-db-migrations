@@ -7,19 +7,22 @@
  */
 class UpdateIblockProperty
 {
+    private $iBlockId = 1;
+    private $code = 'MANUFACTURER';
+
     public function up()
     {
         $properties = CIBlockProperty::GetList(
-            [],
-            [
-                'IBLOCK_ID' => IBLOCK_ID,
-                'CODE' => 'MANUFACTURER'
-            ]
+            array(),
+            array(
+                'IBLOCK_ID' => $this->iBlockId,
+                'CODE' => $this->code,
+            )
         );
         if ($prop_fields = $properties->GetNext()) {
-            $arFields = [
-                'SORT' => 9999,
-            ];
+            $arFields = array(
+                'SORT' => 5000,
+            );
             $ibp = new CIBlockProperty;
             $ibp->Update($prop_fields['ID'], $arFields);
         }
@@ -28,16 +31,16 @@ class UpdateIblockProperty
     public function down()
     {
         $properties = CIBlockProperty::GetList(
-            [],
-            [
-                'IBLOCK_ID' => IBLOCK_ID_CATALOG,
-                'CODE' => 'MANUFACTURER'
-            ]
+            array(),
+            array(
+                'IBLOCK_ID' => $this->iBlockId,
+                'CODE' => $this->code,
+            )
         );
         if ($prop_fields = $properties->GetNext()) {
-            $arFields = [
-                'SORT' => 1000, // значение сортировки до миграции
-            ];
+            $arFields = array(
+                'SORT' => 500, // значение сортировки до миграции
+            );
             $ibp = new CIBlockProperty;
             $ibp->Update($prop_fields['ID'], $arFields);
         }
