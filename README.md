@@ -13,6 +13,7 @@
 - [Добавить свойство инфоблока типа Список](migrations/cms/iblock/AddEnumIblockProperty.php)
 - [Обновить свойство инфоблока](migrations/cms/iblock/UpdateIblockProperty.php)
 - [Обновить свойство инфоблока типа Список](migrations/cms/iblock/AddEnumIblockPropertyValues.php)
+- [Удалить свойство инфоблока](migrations/cms/iblock/DeleteIBlockProperty.php)
 - [Добавить новый раздел](migrations/cms/iblock/AddNewIblockSection.php)
 
 ##Интернет-магазин
