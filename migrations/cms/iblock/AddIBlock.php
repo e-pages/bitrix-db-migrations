@@ -10,6 +10,7 @@ class AddIBlock
 
     public function up()
     {
+        \Bitrix\Main\Loader::includeModule('iblock');
         $cIBlock = new CIBlock();
         $dbIBlock = $cIBlock->GetList(
             array(),
@@ -52,7 +53,9 @@ class AddIBlock
 
     public function down()
     {
-        $dbIBlock = CIBlock::GetList(
+        \Bitrix\Main\Loader::includeModule('iblock');
+        $cIBlock = new CIBlock();
+        $dbIBlock = $cIBlock->GetList(
             array(),
             array('CODE' => static::$iBlockData['CODE'])
         );
