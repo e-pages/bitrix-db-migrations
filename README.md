@@ -3,6 +3,7 @@
 ##Главный модуль
 - [Добавить пользовательское свойство (или Highload Block поле)](migrations/cms/main/AddUserField.php)
 - [Добавить группу пользователей](migrations/cms/main/AddUserGroup.php)
+- [Добавить группы пользователей (Д7)](migrations/cms/main/AddUserGroups.php)
 - [Добавить агента](migrations/cms/main/AddAgent.php)
 - [Добавить записи в b_option](migrations/cms/main/SetOption.php)
 - [Добавить правило подключения шаблона сайта](migrations/cms/main/AddSiteTemplateRule.php)
