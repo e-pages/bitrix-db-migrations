@@ -7,6 +7,7 @@
 - [Добавить агента](migrations/cms/main/AddAgent.php)
 - [Добавить записи в b_option](migrations/cms/main/SetOption.php)
 - [Добавить правило подключения шаблона сайта](migrations/cms/main/AddSiteTemplateRule.php)
+- [Добавить тип почтового события и шаблон](migrations/cms/main/AddMailEventTypeAndTemplate.php)
 
 ##Информационные блоки
 
